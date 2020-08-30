@@ -10,7 +10,9 @@ function App() {
         <h1>POKEMONS</h1>
         <div className="pokemon-container">
           <Switch>
-            <Route exact path="/"><PokemonsList /></Route>
+            <Route exact path="/">
+              <PokemonsList />
+            </Route>
             <Route path="/pokemon/:name">
               <Pokemon />
             </Route>

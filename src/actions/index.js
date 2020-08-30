@@ -4,6 +4,7 @@ export const ERROR_POKEMONS = 'ERROR_POKEMONS';
 export const GET_SINGLE_POKEMON = 'GET_POKEMONS';
 export const CHECK_SINGLE_POKEMON = 'CHECK_POKEMONS';
 export const ERROR_SINGLE_POKEMON = 'ERROR_POKEMONS';
+export const POKEMONS_FILTER = 'POKEMONS_FILTER';
 
 const getPokemons = () => ({
   type: GET_POKEMONS,
@@ -33,6 +34,11 @@ const errorSinglePokemon = error => ({
   error,
 });
 
+const filterChange = type => ({
+  type: POKEMONS_FILTER,
+  category: type,
+});
+
 export {
   getPokemons,
   checkPokemons,
@@ -40,4 +46,5 @@ export {
   getSinglePokemon,
   checkSinglePokemon,
   errorSinglePokemon,
+  filterChange,
 };
