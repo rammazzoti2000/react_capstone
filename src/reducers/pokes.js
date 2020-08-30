@@ -2,6 +2,9 @@ import {
   GET_POKEMONS,
   CHECK_POKEMONS,
   ERROR_POKEMONS,
+  GET_SINGLE_POKEMON,
+  CHECK_SINGLE_POKEMON,
+  ERROR_SINGLE_POKEMON,
 } from '../actions/index';
 
 const initialState = {
@@ -24,6 +27,23 @@ export const pokemonsListReducer = (state = initialState, action) => {
         pokemons: action.payload,
       };
     case ERROR_POKEMONS:
+      return {
+        ...state,
+        isPokemonPending: false,
+        error: action.payload,
+      };
+    case GET_SINGLE_POKEMON:
+      return {
+        ...state,
+        isPokemonPending: true,
+      };
+    case CHECK_SINGLE_POKEMON:
+      return {
+        ...state,
+        isPokemonPending: false,
+        pokemons: [action.payload],
+      };
+    case ERROR_SINGLE_POKEMON:
       return {
         ...state,
         isPokemonPending: false,

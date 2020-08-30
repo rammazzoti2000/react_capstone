@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import pokemonApi from '../api/pokemonApi';
 import { getPokemonsError, getPokemons, getPokemonsPending } from '../reducers/pokes';
+import PokemonSlim from '../components/PokemonSlim';
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   pokemonApi,
@@ -24,7 +25,7 @@ class PokemonsList extends React.Component {
   }
 
   async componentDidMount() {
-    const {pokemonApi} = this.props;
+    const { pokemonApi } = this.props;
     pokemonApi('electric');
   }
 
@@ -60,6 +61,8 @@ class PokemonsList extends React.Component {
                 <img className="pokemon-pic" src="#" alt="bau" />
                 {pokemon.pokemon.name}
               </Link>
+              <PokemonSlim />
+
             </li>
           ))}
         </ul>
