@@ -15,7 +15,7 @@ const pokemonType = async type => {
   throw new Error(response.status);
 };
 
-export const pokemonProps = async name => {
+const pokemonProps = async name => {
   const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
 
   if (response.ok) return response.json();
@@ -35,7 +35,7 @@ const pokemonApi = type => async dispatch => {
   return undefined;
 };
 
-export const pokemonItemApi = name => async dispatch => {
+const pokemonItemApi = name => async dispatch => {
   dispatch(getSinglePokemon());
   try {
     const response = await pokemonProps(name);
@@ -53,4 +53,4 @@ export const pokemonItemApi = name => async dispatch => {
   return undefined;
 };
 
-export default pokemonApi;
+export default { pokemonApi, pokemonItemApi };

@@ -8,7 +8,7 @@ import {
 } from '../actions/index';
 
 const initialState = {
-  pending: false,
+  pending: true,
   pokemons: [],
   error: null,
 };
