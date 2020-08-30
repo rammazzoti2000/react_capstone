@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 import pokemonApi from '../api/pokemonApi';
 import { getPokemonsError, getPokemons, getPokemonsPending } from '../reducers/pokes';
 
@@ -17,13 +18,18 @@ const mapStateToProps = state => ({
 });
 
 class PokemonsList extends React.Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   async componentDidMount() {
     const {pokemonApi} = this.props;
     pokemonApi('electric');
+  }
+
+  handleClick(event) {
+    console.log('handle view');
   }
 
   render() {
@@ -42,9 +48,20 @@ class PokemonsList extends React.Component {
     }
 
     return (
-      <div>
-        <ul>
-          {pokemons.map(pokemon => <li key={pokemon.pokemon.name}>{pokemon.pokemon.name}</li>)}
+      <div className="pokemon-list-wrapper">
+        <ul className="pokemon-list">
+          {pokemons.map(pokemon => (
+            <li
+              className="pokemon-item"
+              key={pokemon.pokemon.name}
+              onClick={this.handleClick}
+            >
+              <Link to={`/pokemon/${pokemon.pokemon.name}`}>
+                <img className="pokemon-pic" src="#" alt="bau" />
+                {pokemon.pokemon.name}
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
     );

@@ -25,3 +25,19 @@ code {
     'Courier New',
     monospace;
 }
+
+ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.pokemon-item {
+  background-color: #4f4f4f;
+  padding: 20px;
+  color: #fff;
+  font-size: 24px;
+  flex: 1 1 300px;
+  height:100px;
+  border: 1px solid violet;
+}
