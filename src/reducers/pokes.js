@@ -1,13 +1,16 @@
-import redux, { createStore } from 'redux';
-
 import {
   GET_POKEMONS,
   CHECK_POKEMONS,
   ERROR_POKEMONS,
-  getPokemons,
 } from '../actions/index';
 
-export function pokemonsListReducer(state = {}, action) {
+const initialState = {
+  pending: false,
+  pokemons: [],
+  error: null,
+};
+
+export default function pokemonsListReducer(state = initialState, action) {
   switch (action.type) {
     case GET_POKEMONS:
       return {
@@ -30,12 +33,6 @@ export function pokemonsListReducer(state = {}, action) {
       return state;
   }
 }
-
-const store = createStore(pokemonsListReducer);
-store.subscribe(() => console.log(store.getState()));
-store.dispatch(getPokemons());
-
-export default store;
 
 export const getPokemo = state => state.pokemons;
 export const getPokemonsPending = state => state.isPokemonPending;
