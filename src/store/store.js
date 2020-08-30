@@ -13,6 +13,9 @@ const initialState = {
 
 const store = createStore(rootReducer, {
   data: initialState,
+  filter: 'select',
 }, applyMiddleware(...middleware));
+
 console.log(store.getState());
+
 export default store;
