@@ -10,7 +10,7 @@ const initialState = {
   error: null,
 };
 
-export default function pokemonsListReducer(state = initialState, action) {
+export const pokemonsListReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_POKEMONS:
       return {
@@ -32,8 +32,8 @@ export default function pokemonsListReducer(state = initialState, action) {
     default:
       return state;
   }
-}
+};
 
-export const getPokemo = state => state.pokemons;
+export const getPokemons = state => state.pokemons;
 export const getPokemonsPending = state => state.isPokemonPending;
 export const getPokemonsError = state => state.error;
