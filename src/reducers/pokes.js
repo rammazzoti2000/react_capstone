@@ -7,47 +7,41 @@ import {
   ERROR_SINGLE_POKEMON,
 } from '../actions/index';
 
-const initialState = {
-  pending: true,
-  pokemons: [],
-  error: null,
-};
-
-export const pokemonsListReducer = (state = initialState, action) => {
+export const pokemonsListReducer = (state = {}, action) => {
   switch (action.type) {
     case GET_POKEMONS:
       return {
         ...state,
-        isPokemonPending: true,
+        pending: true,
       };
     case CHECK_POKEMONS:
       return {
         ...state,
-        isPokemonPending: false,
-        pokemons: action.payload,
+        pending: false,
+        pokemons: action.pokemons,
       };
     case ERROR_POKEMONS:
       return {
         ...state,
-        isPokemonPending: false,
-        error: action.payload,
+        pending: false,
+        error: action.error,
       };
     case GET_SINGLE_POKEMON:
       return {
         ...state,
-        isPokemonPending: true,
+        pendingPokemon: true,
       };
     case CHECK_SINGLE_POKEMON:
       return {
         ...state,
-        isPokemonPending: false,
-        pokemons: [action.payload],
+        pendingPokemon: false,
+        pokemons: [action.pokemons],
       };
     case ERROR_SINGLE_POKEMON:
       return {
         ...state,
-        isPokemonPending: false,
-        error: action.payload,
+        pendingPokemon: false,
+        error: action.error,
       };
     default:
       return state;
@@ -55,5 +49,6 @@ export const pokemonsListReducer = (state = initialState, action) => {
 };
 
 export const getPokemons = state => state.pokemons;
-export const getPokemonsPending = state => state.isPokemonPending;
+export const getPokemonsPending = state => state.pending;
+export const getPokemonPending = state => state.pendingPokemon;
 export const getPokemonsError = state => state.error;

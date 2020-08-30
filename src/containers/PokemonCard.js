@@ -2,35 +2,43 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import Spinner from 'react-bootstrap/Spinner';
 import Pokemon from '../components/Pokemon';
-import { getPokemonsError, getPokemons, getPokemonsPending } from '../reducers/pokes';
+import { getPokemonsError, getPokemons, getPokemonPending } from '../reducers/pokes';
 import pokemonsApi from '../api/pokemonApi';
 
-const PokemonCard = ({ pokemonApi, data }) => {
+export const PokemonCard = ({ pokemonApi, data }) => {
   const { error, pending, pokemons } = data;
-  console.log(error, pending, pokemons);
   const { name } = useParams();
 
   useEffect(() => {
-    setTimeout(() => pokemonApi(name), 2000);
+    pokemonApi(name);
   }, []);
 
   if (error) {
     return (
-      <div>
-        Error!
+      <div className="error">
         {error}
       </div>
     );
-  } else if (pending) {
+  }
+  if (pending) {
     return (
-      <div>
-        Loading...
+      <div className="d-flex justify-content-center">
+        <Spinner animation="grow" />
       </div>
     );
-  } else {
-    return <Pokemon pokemon={pokemons[0]} />
   }
+  if (pokemons.length === 1) {
+    return <Pokemon pokemon={pokemons[0]} />;
+  }
+
+  return (
+    <div className="d-flex justify-content-center">
+      <Spinner animation="grow" />
+    </div>
+  );
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -41,8 +49,25 @@ const mapStateToProps = state => ({
   data: {
     error: getPokemonsError(state),
     pokemons: getPokemons(state),
-    pending: getPokemonsPending(state),
+    pending: getPokemonPending(state),
   },
 });
+
+PokemonCard.defaultProps = {
+  data: {
+    error: null,
+    pending: true,
+    pokemons: [],
+  },
+};
+
+PokemonCard.propTypes = {
+  data: PropTypes.shape({
+    error: PropTypes.string,
+    pending: PropTypes.bool,
+    pokemons: PropTypes.arrayOf(PropTypes.object),
+  }),
+  pokemonApi: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(PokemonCard);

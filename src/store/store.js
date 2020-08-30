@@ -1,9 +1,18 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { pokemonsListReducer } from '../reducers/pokes';
+import rootReducer from '../reducers/index';
 
 const middleware = [thunk];
 
-const store = createStore(pokemonsListReducer, applyMiddleware(...middleware));
+const initialState = {
+  pending: true,
+  pendingPokemon: true,
+  pokemons: [],
+  error: null,
+};
+
+const store = createStore(rootReducer, {
+  data: initialState,
+}, applyMiddleware(...middleware));
 console.log(store.getState());
 export default store;

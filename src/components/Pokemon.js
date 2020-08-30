@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router';
+import PropTypes from 'prop-types';
 
 function Pokemon({ pokemon }) {
   const history = useHistory();
@@ -24,13 +25,13 @@ function Pokemon({ pokemon }) {
       <div>
         <h2>Stats</h2>
         <ul>
-          {pokemon.stats.map(stat => (
-            <li key={stat.stat.name}>
+          {pokemon.stats.map(stats => (
+            <li key={stats.stat.name}>
               <span>
-                {stat.stat.name}
+                {stats.stat.name}
                 :
               </span>
-              {stat.base_stat}
+              {stats.base_stat}
             </li>
           ))}
         </ul>
@@ -39,5 +40,23 @@ function Pokemon({ pokemon }) {
     </div>
   );
 }
+
+Pokemon.defaultProps = {
+  pokemon: {
+    name: 'pikachu',
+    abilities: [],
+    stats: [],
+    sprites: { front_default: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png' },
+  },
+};
+
+Pokemon.propTypes = {
+  pokemon: PropTypes.shape({
+    name: PropTypes.string,
+    abilities: PropTypes.arrayOf(PropTypes.object),
+    stats: PropTypes.arrayOf(PropTypes.object),
+    sprites: PropTypes.objectOf(PropTypes.string),
+  }),
+};
 
 export default Pokemon;

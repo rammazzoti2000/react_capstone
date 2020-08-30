@@ -27,12 +27,23 @@ const pokemonApi = type => async dispatch => {
   dispatch(getPokemons());
   try {
     const response = await pokemonType(type);
-    dispatch(checkPokemons(response.pokemon));
-    return response.pokemon;
+
+    const pokemons = response.pokemon.map(async item => {
+      const res = await fetch(item.pokemon.url);
+      return res.json();
+    });
+    const pokemonsData = await Promise.all(pokemons);
+
+    const payload = pokemonsData.map(data => ({
+      name: data.name,
+      image: data.sprites.front_default,
+    }));
+    dispatch(checkPokemons(payload));
+    return response;
   } catch (error) {
     dispatch(errorPokemons(error));
+    return error;
   }
-  return undefined;
 };
 
 const pokemonItemApi = name => async dispatch => {
@@ -49,8 +60,8 @@ const pokemonItemApi = name => async dispatch => {
     return pokemon;
   } catch (error) {
     dispatch(errorSinglePokemon(error));
+    return error;
   }
-  return undefined;
 };
 
 export default { pokemonApi, pokemonItemApi };
