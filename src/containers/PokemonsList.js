@@ -6,7 +6,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import pokemonsApi from '../api/pokemonApi';
 import { getPokemonsError, getPokemons, getPokemonsPending } from '../reducers/pokes';
 import { pokemonType } from '../reducers/filter';
-import PokemonSlim from '../components/PokemonSlim';
+import PokemonMain from '../components/PokemonMain';
 import PokemonFilter from '../components/PokemonFilter';
 
 class PokemonsList extends React.Component {
@@ -17,7 +17,7 @@ class PokemonsList extends React.Component {
 
   componentDidMount() {
     const { pokemonApi } = this.props;
-    pokemonApi('electric');
+    pokemonApi('normal');
   }
 
   handleType(event) {
@@ -52,7 +52,7 @@ class PokemonsList extends React.Component {
         <PokemonFilter onClick={this.handleType} category={type} />
         <ul className="pokemon-list">
           {pokemons.map(pokemon => (
-            <PokemonSlim
+            <PokemonMain
               className="pokemon-view"
               key={pokemon.name}
               pokemon={pokemon}

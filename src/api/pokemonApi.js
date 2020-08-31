@@ -5,6 +5,7 @@ import {
   getSinglePokemon,
   checkSinglePokemon,
   errorSinglePokemon,
+  filterChange,
 } from '../actions/index';
 
 const pokemonType = async type => {
@@ -39,6 +40,7 @@ const pokemonApi = type => async dispatch => {
       image: data.sprites.front_default,
     }));
     dispatch(checkPokemons(payload));
+    dispatch(filterChange(type));
     return response;
   } catch (error) {
     dispatch(errorPokemons(error));

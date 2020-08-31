@@ -31,7 +31,7 @@ export const PokemonCard = ({ pokemonApi, data }) => {
     );
   }
   if (pokemons.length === 1) {
-    return <Pokemon pokemon={pokemons[0]} />;
+    return <PokemonMain pokemon={pokemons[0]} />;
   }
 
   return (

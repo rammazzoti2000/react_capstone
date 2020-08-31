@@ -13,7 +13,7 @@ const initialState = {
 
 const store = createStore(rootReducer, {
   data: initialState,
-  filter: 'select',
+  filter: 'normal',
 }, applyMiddleware(...middleware));
 
 console.log(store.getState());

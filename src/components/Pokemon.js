@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import PropTypes from 'prop-types';
 
-function Pokemon({ pokemon }) {
+const PokemonMain = ({ pokemon }) => {
   const history = useHistory();
   const handlePrevious = () => {
     history.goBack();
@@ -39,9 +39,9 @@ function Pokemon({ pokemon }) {
       <button type="button" onClick={handlePrevious}>Home</button>
     </div>
   );
-}
+};
 
-Pokemon.defaultProps = {
+PokemonMain.defaultProps = {
   pokemon: {
     name: 'pikachu',
     abilities: [],
@@ -50,7 +50,7 @@ Pokemon.defaultProps = {
   },
 };
 
-Pokemon.propTypes = {
+PokemonMain.propTypes = {
   pokemon: PropTypes.shape({
     name: PropTypes.string,
     abilities: PropTypes.arrayOf(PropTypes.object),
@@ -59,4 +59,4 @@ Pokemon.propTypes = {
   }),
 };
 
-export default Pokemon;
+export default PokemonMain;

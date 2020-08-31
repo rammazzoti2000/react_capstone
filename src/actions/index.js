@@ -10,9 +10,9 @@ const getPokemons = () => ({
   type: GET_POKEMONS,
 });
 
-const checkPokemons = pokemon => ({
+const checkPokemons = data => ({
   type: CHECK_POKEMONS,
-  pokemons: pokemon,
+  pokemons: data,
 });
 
 const errorPokemons = error => ({
@@ -26,7 +26,7 @@ const getSinglePokemon = () => ({
 
 const checkSinglePokemon = pokemon => ({
   type: CHECK_SINGLE_POKEMON,
-  payload: pokemon,
+  pokemons: pokemon,
 });
 
 const errorSinglePokemon = error => ({
