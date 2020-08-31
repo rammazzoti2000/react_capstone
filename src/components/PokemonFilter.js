@@ -24,15 +24,19 @@ const PokemonFilter = props => {
     'unknown',
     'shadow',
   ];
-  const { handleClick } = props;
+  const { onClick, type } = props;
   return (
-    <div className="dropdown-container">
-      <label htmlFor="dropdown-menu">
+    <div className="dropdown-container form-group d-flex justify-content-center">
+      <label htmlFor="type" className="type">
         Pokemon Type
-        <select name="dropdown-menu" className="dropdown-menu" onChange={event => handleClick(event)}>
-          <option value="select">Select Type</option>
+        <select
+          name="type"
+          className="filter-menu"
+          onChange={event => onClick(event)}
+          value={type}
+        >
           {pokemonGroup.map(type => (
-            <option key="type" value="type">
+            <option key={type} value={type}>
               {type}
             </option>
           ))}
@@ -42,8 +46,13 @@ const PokemonFilter = props => {
   );
 };
 
+PokemonFilter.defaultProps = {
+  type: 'normal',
+};
+
 PokemonFilter.propTypes = {
-  handleClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
+  type: PropTypes.string,
 };
 
 export default PokemonFilter;

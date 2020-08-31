@@ -5,11 +5,14 @@ import PropTypes from 'prop-types';
 import Spinner from 'react-bootstrap/Spinner';
 import pokemonsApi from '../api/pokemonApi';
 import { getPokemonsError, getPokemons, getPokemonsPending } from '../reducers/pokes';
+import { pokemonType } from '../reducers/filter';
 import PokemonSlim from '../components/PokemonSlim';
+import PokemonFilter from '../components/PokemonFilter';
 
 class PokemonsList extends React.Component {
   constructor(props) {
     super(props);
+    this.handleType = this.handleType.bind(this);
   }
 
   componentDidMount() {
@@ -17,8 +20,16 @@ class PokemonsList extends React.Component {
     pokemonApi('electric');
   }
 
+  handleType(event) {
+    event.preventDefault();
+    const { pokemonApi } = this.props;
+    if (event.target.value !== '') {
+      getPokemons(event.target.value);
+    }
+  }
+
   render() {
-    const { data } = this.props;
+    const { data, type } = this.props;
     const { error, pending, pokemons } = data;
     if (error) {
       return (
@@ -29,11 +40,16 @@ class PokemonsList extends React.Component {
     }
 
     if (pending) {
-      return <div>loading..</div>;
+      return (
+        <div>
+          <Spinner animation="grow" />
+        </div>
+      );
     }
 
     return (
       <div className="pokemon-list-wrapper">
+        <PokemonFilter onClick={this.handleType} category={type} />
         <ul className="pokemon-list">
           {pokemons.map(pokemon => (
             <PokemonSlim
@@ -58,6 +74,7 @@ const mapStateToProps = state => ({
     pokemons: getPokemons(state.data),
     pending: getPokemonsPending(state.data),
   },
+  type: pokemonType(state.type),
 });
 
 PokemonsList.defaultProps = {
@@ -66,6 +83,7 @@ PokemonsList.defaultProps = {
     error: null,
     pokemons: [],
   },
+  type: 'normal',
 };
 
 PokemonsList.propTypes = {
@@ -75,6 +93,7 @@ PokemonsList.propTypes = {
     pokemons: PropTypes.arrayOf(PropTypes.object),
   }),
   pokemonApi: PropTypes.func.isRequired,
+  type: PropTypes.string,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PokemonsList);

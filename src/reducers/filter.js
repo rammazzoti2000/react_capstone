@@ -1,5 +1,5 @@
 const POKEMON_FILTER = 'POKEMON_FILTER';
-const filter = (state = 'select', action) => {
+export const filter = (state = 'select', action) => {
   switch (action.type) {
     case POKEMON_FILTER:
       return action.type;
@@ -8,4 +8,4 @@ const filter = (state = 'select', action) => {
   }
 };
 
-export default filter;
+export const pokemonType = type => type;
