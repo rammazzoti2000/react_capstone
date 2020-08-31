@@ -8,7 +8,7 @@ import { getPokemonsError, getPokemons, getPokemonPending } from '../reducers/po
 import fetchPokemonsActions from '../api/pokemonApi';
 import Pokemon from '../components/Pokemon';
 
-export const DetailedView = ({ fetchPokemon, data }) => {
+export const PokemonCard = ({ fetchPokemon, data }) => {
   const { error, pending, pokemons = [] } = data;
 
   const { name } = useParams();
@@ -54,7 +54,7 @@ const mapStatetoProps = state => ({
   },
 });
 
-DetailedView.defaultProps = {
+PokemonCard.defaultProps = {
   data: {
     error: null,
     pending: true,
@@ -62,7 +62,7 @@ DetailedView.defaultProps = {
   },
 };
 
-DetailedView.propTypes = {
+PokemonCard.propTypes = {
   data: PropTypes.shape({
     error: PropTypes.string,
     pending: PropTypes.bool,
@@ -71,4 +71,4 @@ DetailedView.propTypes = {
   fetchPokemon: PropTypes.func.isRequired,
 };
 
-export default connect(mapStatetoProps, mapDispatchToProps)(DetailedView);
+export default connect(mapStatetoProps, mapDispatchToProps)(PokemonCard);

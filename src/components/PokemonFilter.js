@@ -1,25 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const CategoryFilter = props => {
+const PokemonFilter = props => {
   const pokemonCategories = [
     'normal',
-    'fighting',
-    'flying',
-    'poison',
-    'ground',
-    'rock',
-    'bug',
-    'ghost',
-    'steel',
     'fire',
     'water',
     'grass',
     'electric',
-    'psychic',
     'ice',
-    'dragon',
+    'fighting',
+    'poison',
+    'ground',
+    'psychic',
+    'bug',
+    'rock',
+    'ghost',
     'dark',
+    'dragon',
+    'steel',
     'fairy',
   ];
   const { onClick, category } = props;
@@ -30,20 +29,20 @@ const CategoryFilter = props => {
 
         <select name="category" className="custom-select" value={category} onChange={e => onClick(e)}>
           <option value="">Select category</option>
-          {pokemonCategories.map(cat => (<option key={cat} value={cat}>{cat}</option>))}
+          {pokemonCategories.map(type => (<option key={type} value={type}>{type}</option>))}
         </select>
       </label>
     </div>
   );
 };
 
-CategoryFilter.defaultProps = {
+PokemonFilter.defaultProps = {
   category: 'normal',
 };
 
-CategoryFilter.propTypes = {
+PokemonFilter.propTypes = {
   onClick: PropTypes.func.isRequired,
   category: PropTypes.string,
 };
 
-export default CategoryFilter;
+export default PokemonFilter;

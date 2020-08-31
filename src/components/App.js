@@ -1,30 +1,29 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Catalogue from '../containers/PokemonsList';
-import DetailedPokemonView from '../containers/PokemonCard';
+import {
+  BrowserRouter as Router, Route, Switch, Link,
+} from 'react-router-dom';
+import PokemonList from '../containers/PokemonsList';
+import PokemonCard from '../containers/PokemonCard';
 
-const app = () => (
+const App = () => (
   <Router>
-    <div>
-      <div className="title">
-        <h1>Pokemons!</h1>
-      </div>
+    <div className="max-w-screen-xl mx-auto">
+      <Link to="/">
+        <img
+          className="mx-auto my-4 w-50"
+          src="https://fontmeme.com/permalink/200831/9ec6736ad53d60e269c1d456f8921ce5.png"
+          alt="pokemon-font"
+        />
+      </Link>
+      {' '}
       <div className="switch">
         <Switch>
-          <Route exact path="/">
-            {' '}
-            <Catalogue />
-            {' '}
-          </Route>
-          <Route path="/pokemon/:name">
-            {' '}
-            <DetailedPokemonView />
-            {' '}
-          </Route>
+          <Route exact path="/" component={PokemonList} />
+          <Route path="/pokemon/:name" component={PokemonCard} />
         </Switch>
       </div>
     </div>
   </Router>
 );
 
-export default app;
+export default App;

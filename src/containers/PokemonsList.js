@@ -6,10 +6,10 @@ import Spinner from 'react-bootstrap/Spinner';
 import fetchPokemonsActions from '../api/pokemonApi';
 import { getPokemonsError, getPokemons, getPokemonsPending } from '../reducers/pokes';
 import { getPokemonType } from '../reducers/filter';
-import PokemonCompactView from '../components/PokemonMain';
-import CategoryFilter from '../components/PokemonFilter';
+import PokemonMain from '../components/PokemonMain';
+import PokemonFilter from '../components/PokemonFilter';
 
-export class Catalog extends React.Component {
+export class PokemonList extends React.Component {
   constructor(props) {
     super(props);
     this.handleFilterChange = this.handleFilterChange.bind(this);
@@ -57,10 +57,10 @@ export class Catalog extends React.Component {
 
     return (
       <div className="catalogue">
-        <CategoryFilter onClick={this.handleFilterChange} category={filter} />
+        <PokemonFilter onClick={this.handleFilterChange} category={filter} />
         <ul className="pokelist container row mx-auto">
           {pokemons.map(pokemon => (
-            <PokemonCompactView
+            <PokemonMain
               key={pokemon.name}
               pokemon={pokemon}
             />
@@ -84,7 +84,7 @@ const mapStateToProps = state => ({
   filter: getPokemonType(state.filter),
 });
 
-Catalog.defaultProps = {
+PokemonList.defaultProps = {
   data: {
     pending: true,
     error: null,
@@ -93,7 +93,7 @@ Catalog.defaultProps = {
   filter: 'normal',
 };
 
-Catalog.propTypes = {
+PokemonList.propTypes = {
   data: PropTypes.shape({
     pending: PropTypes.bool,
     error: PropTypes.string,
@@ -102,4 +102,4 @@ Catalog.propTypes = {
   filter: PropTypes.string,
   fetchPokemons: PropTypes.func.isRequired,
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Catalog);
+export default connect(mapStateToProps, mapDispatchToProps)(PokemonList);

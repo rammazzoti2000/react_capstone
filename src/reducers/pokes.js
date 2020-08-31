@@ -1,43 +1,43 @@
 import {
-  FETCH_POKEMONS_PENDING,
-  FETCH_POKEMONS_SUCCESS,
-  FETCH_POKEMONS_ERROR,
-  FETCH_SINGLE_POKEMON_ERROR,
-  FETCH_SINGLE_POKEMON_PENDING,
-  FETCH_SINGLE_POKEMON_SUCCESS,
+  GET_POKEMONS_PENDING,
+  GET_POKEMONS_SUCCESS,
+  GET_POKEMONS_ERROR,
+  GET_SINGLE_POKEMON_ERROR,
+  GET_SINGLE_POKEMON_PENDING,
+  GET_SINGLE_POKEMON_SUCCESS,
 } from '../actions/index';
 
 export const pokemonsReducer = (state = {}, action) => {
   switch (action.type) {
-    case FETCH_POKEMONS_PENDING:
+    case GET_POKEMONS_PENDING:
       return {
         ...state,
         pending: true,
       };
-    case FETCH_POKEMONS_SUCCESS:
+    case GET_POKEMONS_SUCCESS:
       return {
         ...state,
         pending: false,
         pokemons: action.pokemons,
       };
-    case FETCH_POKEMONS_ERROR:
+    case GET_POKEMONS_ERROR:
       return {
         ...state,
         pending: false,
         error: action.error,
       };
-    case FETCH_SINGLE_POKEMON_PENDING:
+    case GET_SINGLE_POKEMON_PENDING:
       return {
         ...state,
         pendingPokemon: true,
       };
-    case FETCH_SINGLE_POKEMON_SUCCESS:
+    case GET_SINGLE_POKEMON_SUCCESS:
       return {
         ...state,
         pendingPokemon: false,
         pokemons: [action.pokemons],
       };
-    case FETCH_SINGLE_POKEMON_ERROR:
+    case GET_SINGLE_POKEMON_ERROR:
       return {
         ...state,
         pendingPokemon: false,
