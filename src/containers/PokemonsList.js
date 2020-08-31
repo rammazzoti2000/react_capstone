@@ -3,37 +3,37 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import Spinner from 'react-bootstrap/Spinner';
-import pokemonsApi from '../api/pokemonApi';
+import fetchPokemonsActions from '../api/pokemonApi';
 import { getPokemonsError, getPokemons, getPokemonsPending } from '../reducers/pokes';
-import { pokemonType } from '../reducers/filter';
-import PokemonMain from '../components/PokemonMain';
-import PokemonFilter from '../components/PokemonFilter';
+import { getPokemonType } from '../reducers/filter';
+import PokemonCompactView from '../components/PokemonMain';
+import CategoryFilter from '../components/PokemonFilter';
 
-class PokemonsList extends React.Component {
+export class Catalog extends React.Component {
   constructor(props) {
     super(props);
-    this.handleType = this.handleType.bind(this);
+    this.handleFilterChange = this.handleFilterChange.bind(this);
   }
 
   componentDidMount() {
-    const { pokemonApi } = this.props;
-    pokemonApi('normal');
+    const { fetchPokemons } = this.props;
+    fetchPokemons('normal');
   }
 
-  handleType(event) {
-    event.preventDefault();
-    const { pokemonApi } = this.props;
-    if (event.target.value !== '') {
-      getPokemons(event.target.value);
+  handleFilterChange(e) {
+    const { fetchPokemons } = this.props;
+    if (e.target.value !== '') {
+      fetchPokemons(e.target.value);
     }
+    e.preventDefault();
   }
 
   render() {
-    const { data, type } = this.props;
+    const { data, filter } = this.props;
     const { error, pending, pokemons } = data;
     if (error) {
       return (
-        <div>
+        <div className="error">
           {error}
         </div>
       );
@@ -41,19 +41,26 @@ class PokemonsList extends React.Component {
 
     if (pending) {
       return (
-        <div>
+        <div className="d-flex justify-content-center">
+          <Spinner animation="grow" />
+        </div>
+      );
+    }
+
+    if (pokemons.length < 2) {
+      return (
+        <div className="d-flex justify-content-center">
           <Spinner animation="grow" />
         </div>
       );
     }
 
     return (
-      <div className="pokemon-list-wrapper">
-        <PokemonFilter onClick={this.handleType} category={type} />
-        <ul className="pokemon-list">
+      <div className="catalogue">
+        <CategoryFilter onClick={this.handleFilterChange} category={filter} />
+        <ul className="pokelist container row mx-auto">
           {pokemons.map(pokemon => (
-            <PokemonMain
-              className="pokemon-view"
+            <PokemonCompactView
               key={pokemon.name}
               pokemon={pokemon}
             />
@@ -65,7 +72,7 @@ class PokemonsList extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  pokemonApi: pokemonsApi.pokemonApi,
+  fetchPokemons: fetchPokemonsActions.fetchPokemons,
 }, dispatch);
 
 const mapStateToProps = state => ({
@@ -74,26 +81,25 @@ const mapStateToProps = state => ({
     pokemons: getPokemons(state.data),
     pending: getPokemonsPending(state.data),
   },
-  type: pokemonType(state.type),
+  filter: getPokemonType(state.filter),
 });
 
-PokemonsList.defaultProps = {
+Catalog.defaultProps = {
   data: {
     pending: true,
     error: null,
     pokemons: [],
   },
-  type: 'normal',
+  filter: 'normal',
 };
 
-PokemonsList.propTypes = {
+Catalog.propTypes = {
   data: PropTypes.shape({
     pending: PropTypes.bool,
     error: PropTypes.string,
     pokemons: PropTypes.arrayOf(PropTypes.object),
   }),
-  pokemonApi: PropTypes.func.isRequired,
-  type: PropTypes.string,
+  filter: PropTypes.string,
+  fetchPokemons: PropTypes.func.isRequired,
 };
-
-export default connect(mapStateToProps, mapDispatchToProps)(PokemonsList);
+export default connect(mapStateToProps, mapDispatchToProps)(Catalog);

@@ -2,29 +2,34 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const Pokemon = ({ pokemon }) => (
+const pokemonItem = ({ pokemon }) => (
   <li
-    className="pokemon-item"
+    className="pokemon col-4"
   >
     <Link to={`/pokemon/${pokemon.name}`}>
-      <img className="pokemon-pic" src={pokemon.image} alt={pokemon.id} />
-      <p>{pokemon.name}</p>
+
+      <div className="d-flex flex-column align-items-center">
+        <div>
+          <img className="pokemon-pic" src={pokemon.image ? pokemon.image : 'whoIs'} alt={pokemon.name} />
+        </div>
+
+        <p>{pokemon.name}</p>
+      </div>
+
     </Link>
   </li>
 );
 
-Pokemon.defaultProps = {
+pokemonItem.defaultProps = {
   pokemon: {
     name: 'pikachu',
   },
 };
 
-Pokemon.propTypes = {
+pokemonItem.propTypes = {
   pokemon: PropTypes.shape({
     name: PropTypes.string,
-    image: PropTypes.node,
-    id: PropTypes.number,
   }),
 };
 
-export default Pokemon;
+export default pokemonItem;

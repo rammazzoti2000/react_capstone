@@ -1,14 +1,14 @@
 import {
-  getPokemons,
-  checkPokemons,
-  errorPokemons,
-  getSinglePokemon,
-  checkSinglePokemon,
-  errorSinglePokemon,
-  filterChange,
+  fetchPokemonsPending,
+  fetchPokemonsSuccess,
+  fetchPokemonsError,
+  fetchSinglePokemonError,
+  fetchSinglePokemonPending,
+  fetchSinglePokemonSuccess,
+  changeType,
 } from '../actions/index';
 
-const pokemonType = async type => {
+const pokemonsType = async type => {
   const response = await fetch(`https://pokeapi.co/api/v2/type/${type}`);
 
   if (response.ok) return response.json();
@@ -24,32 +24,30 @@ const pokemonProps = async name => {
   throw new Error(response.status);
 };
 
-const pokemonApi = type => async dispatch => {
-  dispatch(getPokemons());
+const fetchPokemons = type => async dispatch => {
+  dispatch(fetchPokemonsPending());
   try {
-    const response = await pokemonType(type);
-
-    const pokemons = response.pokemon.map(async item => {
-      const res = await fetch(item.pokemon.url);
+    const response = await pokemonsType(type);
+    const pokemons = response.pokemon.map(async pok => {
+      const res = await fetch(pok.pokemon.url);
       return res.json();
     });
     const pokemonsData = await Promise.all(pokemons);
-
     const payload = pokemonsData.map(data => ({
       name: data.name,
       image: data.sprites.front_default,
     }));
-    dispatch(checkPokemons(payload));
-    dispatch(filterChange(type));
+    dispatch(fetchPokemonsSuccess(payload));
+    dispatch(changeType(type));
     return response;
-  } catch (error) {
-    dispatch(errorPokemons(error));
-    return error;
+  } catch (e) {
+    dispatch(fetchPokemonsError(e));
+    return e;
   }
 };
 
-const pokemonItemApi = name => async dispatch => {
-  dispatch(getSinglePokemon());
+const fetchPokemon = name => async dispatch => {
+  dispatch(fetchSinglePokemonPending());
   try {
     const response = await pokemonProps(name);
     const pokemon = {
@@ -58,12 +56,15 @@ const pokemonItemApi = name => async dispatch => {
       sprites: response.sprites,
       stats: response.stats,
     };
-    dispatch(checkSinglePokemon(pokemon));
+    dispatch(fetchSinglePokemonSuccess(pokemon));
     return pokemon;
-  } catch (error) {
-    dispatch(errorSinglePokemon(error));
-    return error;
+  } catch (e) {
+    dispatch(fetchSinglePokemonError(e));
+    return e;
   }
 };
 
-export default { pokemonApi, pokemonItemApi };
+export default {
+  fetchPokemons,
+  fetchPokemon,
+};

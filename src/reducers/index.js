@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import { pokemonsListReducer } from './pokes';
-import { filter } from './filter';
+import { pokemonsReducer } from './pokes';
+import { filterType } from './filter';
 
 const rootReducer = combineReducers({
-  data: pokemonsListReducer,
-  filter,
+  data: pokemonsReducer,
+  filter: filterType,
 });
 
 export default rootReducer;

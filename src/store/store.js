@@ -16,6 +16,4 @@ const store = createStore(rootReducer, {
   filter: 'normal',
 }, applyMiddleware(...middleware));
 
-console.log(store.getState());
-
 export default store;

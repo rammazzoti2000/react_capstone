@@ -2,46 +2,48 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import PropTypes from 'prop-types';
 
-const PokemonMain = ({ pokemon }) => {
+const Pokemon = ({ pokemon }) => {
   const history = useHistory();
-  const handlePrevious = () => {
+
+  const goBackHandle = () => {
     history.goBack();
   };
 
   return (
-    <div>
-      <div className="pokemon-container">
+    <div className="container pokemon-detailed">
+      <div className="pokemon-container d-flex justify-content-center align-items-center">
         <img src={pokemon.sprites.front_default} alt={pokemon.name} />
         <h1>{pokemon.name}</h1>
       </div>
 
-      <div>
-        <h2>Abilities:</h2>
-        <ul className="stats">
-          {pokemon.abilities.map(item => <li key={item.ability.name}>{item.ability.name}</li>)}
+      <div className="d-flex flex-column">
+        <h2 className="text-center">Abilities:</h2>
+        <ul className="d-flex justify-content-center">
+          {pokemon.abilities.map(item => <li key={item.ability.name} className="abilities">{item.ability.name}</li>)}
         </ul>
       </div>
 
-      <div>
-        <h2>Stats</h2>
-        <ul>
+      <div className="d-flex flex-column">
+        <h2 className="text-center">Stats</h2>
+        <ul className="d-flex justify-content-center">
           {pokemon.stats.map(stats => (
-            <li key={stats.stat.name}>
+            <li key={stats.stat.name} className="stats mb-3">
               <span>
                 {stats.stat.name}
                 :
               </span>
+              {' '}
               {stats.base_stat}
             </li>
           ))}
         </ul>
       </div>
-      <button type="button" onClick={handlePrevious}>Home</button>
+      <button type="button" className="btn btn-secondary" onClick={goBackHandle}>Go back</button>
     </div>
   );
 };
 
-PokemonMain.defaultProps = {
+Pokemon.defaultProps = {
   pokemon: {
     name: 'pikachu',
     abilities: [],
@@ -50,7 +52,7 @@ PokemonMain.defaultProps = {
   },
 };
 
-PokemonMain.propTypes = {
+Pokemon.propTypes = {
   pokemon: PropTypes.shape({
     name: PropTypes.string,
     abilities: PropTypes.arrayOf(PropTypes.object),
@@ -59,4 +61,4 @@ PokemonMain.propTypes = {
   }),
 };
 
-export default PokemonMain;
+export default Pokemon;

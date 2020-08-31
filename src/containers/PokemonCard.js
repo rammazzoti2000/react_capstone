@@ -4,16 +4,17 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import Spinner from 'react-bootstrap/Spinner';
-import Pokemon from '../components/Pokemon';
 import { getPokemonsError, getPokemons, getPokemonPending } from '../reducers/pokes';
-import pokemonsApi from '../api/pokemonApi';
+import fetchPokemonsActions from '../api/pokemonApi';
+import Pokemon from '../components/Pokemon';
 
-export const PokemonCard = ({ pokemonApi, data }) => {
-  const { error, pending, pokemons } = data;
+export const DetailedView = ({ fetchPokemon, data }) => {
+  const { error, pending, pokemons = [] } = data;
+
   const { name } = useParams();
 
   useEffect(() => {
-    pokemonApi(name);
+    fetchPokemon(name); // eslint-disable-next-line
   }, []);
 
   if (error) {
@@ -31,7 +32,7 @@ export const PokemonCard = ({ pokemonApi, data }) => {
     );
   }
   if (pokemons.length === 1) {
-    return <PokemonMain pokemon={pokemons[0]} />;
+    return <Pokemon pokemon={pokemons[0]} />;
   }
 
   return (
@@ -42,18 +43,18 @@ export const PokemonCard = ({ pokemonApi, data }) => {
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  pokemonApi: pokemonsApi.pokemonApi,
+  fetchPokemon: fetchPokemonsActions.fetchPokemon,
 }, dispatch);
 
-const mapStateToProps = state => ({
+const mapStatetoProps = state => ({
   data: {
-    error: getPokemonsError(state),
-    pokemons: getPokemons(state),
-    pending: getPokemonPending(state),
+    error: getPokemonsError(state.data),
+    pokemons: getPokemons(state.data),
+    pending: getPokemonPending(state.data),
   },
 });
 
-PokemonCard.defaultProps = {
+DetailedView.defaultProps = {
   data: {
     error: null,
     pending: true,
@@ -61,13 +62,13 @@ PokemonCard.defaultProps = {
   },
 };
 
-PokemonCard.propTypes = {
+DetailedView.propTypes = {
   data: PropTypes.shape({
     error: PropTypes.string,
     pending: PropTypes.bool,
     pokemons: PropTypes.arrayOf(PropTypes.object),
   }),
-  pokemonApi: PropTypes.func.isRequired,
+  fetchPokemon: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PokemonCard);
+export default connect(mapStatetoProps, mapDispatchToProps)(DetailedView);

@@ -1,50 +1,57 @@
-export const GET_POKEMONS = 'GET_POKEMONS';
-export const CHECK_POKEMONS = 'CHECK_POKEMONS';
-export const ERROR_POKEMONS = 'ERROR_POKEMONS';
-export const GET_SINGLE_POKEMON = 'GET_POKEMONS';
-export const CHECK_SINGLE_POKEMON = 'CHECK_POKEMONS';
-export const ERROR_SINGLE_POKEMON = 'ERROR_POKEMONS';
-export const POKEMONS_FILTER = 'POKEMONS_FILTER';
+const FETCH_POKEMONS_PENDING = 'FETCH_POKEMONS_PENDING';
+const FETCH_POKEMONS_SUCCESS = 'FETCH_POKEMONS_SUCCESS';
+const FETCH_POKEMONS_ERROR = 'FETCH_POKEMONS_ERROR';
+const FETCH_SINGLE_POKEMON_PENDING = 'FETCH_SINGLE_POKEMON_PENDING';
+const FETCH_SINGLE_POKEMON_SUCCESS = 'FETCH_SINGLE_POKEMON_SUCCESS';
+const FETCH_SINGLE_POKEMON_ERROR = 'FETCH_SINGLE_POKEMON_ERROR';
+const FILTER_TYPE = 'FILTER_TYPE';
 
-const getPokemons = () => ({
-  type: GET_POKEMONS,
+const fetchPokemonsPending = () => ({
+  type: FETCH_POKEMONS_PENDING,
 });
 
-const checkPokemons = data => ({
-  type: CHECK_POKEMONS,
+const fetchPokemonsSuccess = data => ({
+  type: FETCH_POKEMONS_SUCCESS,
   pokemons: data,
 });
 
-const errorPokemons = error => ({
-  type: ERROR_POKEMONS,
+const fetchPokemonsError = error => ({
+  type: FETCH_POKEMONS_ERROR,
   error,
 });
 
-const getSinglePokemon = () => ({
-  type: GET_SINGLE_POKEMON,
+const fetchSinglePokemonPending = () => ({
+  type: FETCH_SINGLE_POKEMON_PENDING,
 });
 
-const checkSinglePokemon = pokemon => ({
-  type: CHECK_SINGLE_POKEMON,
+const fetchSinglePokemonSuccess = pokemon => ({
+  type: FETCH_SINGLE_POKEMON_SUCCESS,
   pokemons: pokemon,
 });
 
-const errorSinglePokemon = error => ({
-  type: ERROR_SINGLE_POKEMON,
+const fetchSinglePokemonError = error => ({
+  type: FETCH_SINGLE_POKEMON_ERROR,
   error,
 });
 
-const filterChange = type => ({
-  type: POKEMONS_FILTER,
+const changeType = type => ({
+  type: FILTER_TYPE,
   category: type,
 });
 
 export {
-  getPokemons,
-  checkPokemons,
-  errorPokemons,
-  getSinglePokemon,
-  checkSinglePokemon,
-  errorSinglePokemon,
-  filterChange,
+  FETCH_POKEMONS_PENDING,
+  FETCH_POKEMONS_SUCCESS,
+  FETCH_POKEMONS_ERROR,
+  FETCH_SINGLE_POKEMON_ERROR,
+  FETCH_SINGLE_POKEMON_PENDING,
+  FETCH_SINGLE_POKEMON_SUCCESS,
+  FILTER_TYPE,
+  fetchPokemonsPending,
+  fetchPokemonsSuccess,
+  fetchPokemonsError,
+  fetchSinglePokemonError,
+  fetchSinglePokemonPending,
+  fetchSinglePokemonSuccess,
+  changeType,
 };

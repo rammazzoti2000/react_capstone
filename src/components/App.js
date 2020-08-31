@@ -1,26 +1,30 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import PokemonsList from '../containers/PokemonsList';
-import Pokemon from './Pokemon';
+import Catalogue from '../containers/PokemonsList';
+import DetailedPokemonView from '../containers/PokemonCard';
 
-function App() {
-  return (
-    <Router>
-      <div className="App">
-        <h1>POKEMONS</h1>
-        <div className="pokemon-container">
-          <Switch>
-            <Route exact path="/">
-              <PokemonsList />
-            </Route>
-            <Route path="/pokemon/:name">
-              <Pokemon />
-            </Route>
-          </Switch>
-        </div>
+const app = () => (
+  <Router>
+    <div>
+      <div className="title">
+        <h1>Pokemons!</h1>
       </div>
-    </Router>
-  );
-}
+      <div className="switch">
+        <Switch>
+          <Route exact path="/">
+            {' '}
+            <Catalogue />
+            {' '}
+          </Route>
+          <Route path="/pokemon/:name">
+            {' '}
+            <DetailedPokemonView />
+            {' '}
+          </Route>
+        </Switch>
+      </div>
+    </div>
+  </Router>
+);
 
-export default App;
+export default app;
