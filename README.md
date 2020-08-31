@@ -108,7 +108,7 @@ To have this app on your pc, you need to:
 ## Automated Test
  > to be added
  
- ## Walkthrough Video and Deployment (GitHub-Pages)
+ ## Walkthrough Video and Deployment (Heroku)
 https://www.loom.com/share/5860127540704697aba0d3dc360b97bd
 ##
 
