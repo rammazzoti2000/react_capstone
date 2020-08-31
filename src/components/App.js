@@ -10,13 +10,13 @@ const App = () => (
     <div className="max-w-screen-xl mx-auto">
       <Link to="/">
         <img
-          className="mx-auto my-4 w-50"
+          className="d-block mx-auto my-4 w-50"
           src="https://fontmeme.com/permalink/200831/9ec6736ad53d60e269c1d456f8921ce5.png"
           alt="pokemon-font"
         />
       </Link>
       {' '}
-      <div className="switch">
+      <div className="switch d-flex justify-content-center">
         <Switch>
           <Route exact path="/" component={PokemonList} />
           <Route path="/pokemon/:name" component={PokemonCard} />

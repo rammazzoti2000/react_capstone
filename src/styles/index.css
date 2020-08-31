@@ -14,6 +14,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  background-color: rgb(220, 220, 220) !important;
 }
 
 code {
@@ -24,4 +26,21 @@ code {
     Consolas,
     'Courier New',
     monospace;
+}
+
+#container-list {
+  margin-bottom: 20px;
+}
+
+#inner-list {
+  width: 18em;
+  height: 14em;
+  background-color: white;
+  box-shadow: 2px 2px 50px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  margin: auto;
+}
+
+.pokemon-pic {
+  width: 135px;
 }

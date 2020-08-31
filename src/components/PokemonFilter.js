@@ -23,15 +23,16 @@ const PokemonFilter = props => {
   ];
   const { onClick, category } = props;
   return (
-    <div className="form-group d-flex justify-content-center">
-      <label htmlFor="category" className="category">
-        Select Pokemon Category
-
-        <select name="category" className="custom-select" value={category} onChange={e => onClick(e)}>
-          <option value="">Select category</option>
-          {pokemonCategories.map(type => (<option key={type} value={type}>{type}</option>))}
-        </select>
-      </label>
+    <div className="form-group w-75 m-auto">
+      <h3 className="d-flex justify-content-center">
+        Pokemon Type:
+        <span className="ml-2">
+          <select name="category" className="custom-select" value={category} onChange={e => onClick(e)}>
+            <option value="">Select category</option>
+            {pokemonCategories.map(type => (<option key={type} value={type}>{type}</option>))}
+          </select>
+        </span>
+      </h3>
     </div>
   );
 };

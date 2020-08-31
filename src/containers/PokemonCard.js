@@ -8,7 +8,7 @@ import { getPokemonsError, getPokemons, getPokemonPending } from '../reducers/po
 import fetchPokemonsActions from '../api/pokemonApi';
 import Pokemon from '../components/Pokemon';
 
-export const PokemonCard = ({ fetchPokemon, data }) => {
+const PokemonCard = ({ fetchPokemon, data }) => {
   const { error, pending, pokemons = [] } = data;
 
   const { name } = useParams();

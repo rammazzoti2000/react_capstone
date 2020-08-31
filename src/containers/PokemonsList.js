@@ -9,7 +9,7 @@ import { getPokemonType } from '../reducers/filter';
 import PokemonMain from '../components/PokemonMain';
 import PokemonFilter from '../components/PokemonFilter';
 
-export class PokemonList extends React.Component {
+class PokemonList extends React.Component {
   constructor(props) {
     super(props);
     this.handleFilterChange = this.handleFilterChange.bind(this);
@@ -58,13 +58,15 @@ export class PokemonList extends React.Component {
     return (
       <div className="catalogue">
         <PokemonFilter onClick={this.handleFilterChange} category={filter} />
-        <ul className="pokelist container row mx-auto">
-          {pokemons.map(pokemon => (
-            <PokemonMain
-              key={pokemon.name}
-              pokemon={pokemon}
-            />
-          ))}
+        <ul className="pokelist d-flex container mx-auto my-12 mt-4 flex flex-wrap col">
+          <div className="row">
+            {pokemons.map(pokemon => (
+              <PokemonMain
+                key={pokemon.name}
+                pokemon={pokemon}
+              />
+            ))}
+          </div>
         </ul>
       </div>
     );

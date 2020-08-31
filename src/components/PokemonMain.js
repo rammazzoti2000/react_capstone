@@ -1,20 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import picture from '../assets/picture.png';
 
 const PokemonMain = ({ pokemon }) => (
-  <li
-    className="pokemon col-4"
-  >
+  <li className="col mb-5" id="container-list rounded">
     <Link to={`/pokemon/${pokemon.name}`}>
-
-      <div className="d-flex flex-column align-items-center">
-        <div>
-          <img className="pokemon-pic" src={pokemon.image ? pokemon.image : 'picture'} alt={pokemon.name} />
+      <div className="d-flex flex-column align-items-center rounded" id="inner-list">
+        <div className="bg-dark w-100 h-75 mb-2 rounded-top">
+          <img className="pokemon-pic d-block m-auto" src={pokemon.image ? pokemon.image : picture} alt={pokemon.name} />
         </div>
-        <p>{pokemon.name}</p>
+        <p className="text-capitalize font-weight-bold">{pokemon.name}</p>
       </div>
-
     </Link>
   </li>
 );
