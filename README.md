@@ -107,6 +107,10 @@ To have this app on your pc, you need to:
 
 ## Automated Test
  > to be added
+ 
+ ## Walkthrough Video and Deployment (GitHub-Pages)
+https://www.loom.com/share/5860127540704697aba0d3dc360b97bd
+##
 
 ## Live Demo & Deployment
 The project has been deployed with [Heroku Buildpack for create-react-app](https://github.com/mars/create-react-app-buildpack#user-content-requires)
