@@ -18,12 +18,12 @@ const Pokemon = ({ pokemon }) => {
 
       <div className="d-flex flex-column align-items-start">
         <h1 className="text-capitalize pb-3">{pokemon.name}</h1>
-        <h2 className="text-center">Abilities:</h2>
-        <ul className="d-flex justify-content-center">
+        <h2 className="text-center mb-2">Abilities:</h2>
+        <ul className="d-flex justify-content-center mb-4">
           {pokemon.abilities.map(item => <li key={item.ability.name} className="abilities bg-success mr-2 p-2 rounded font-weight-bold">{item.ability.name}</li>)}
         </ul>
         <div className="d-flex flex-column align-items-start">
-          <h2 className="text-center">Stats</h2>
+          <h2 className="text-center mb-2">Stats:</h2>
           <ul className="d-flex flex-wrap">
             {pokemon.stats.map(stats => (
               <li key={stats.stat.name} className="stats mb-3 bg-primary mr-2 p-2 rounded font-weight-bold">
