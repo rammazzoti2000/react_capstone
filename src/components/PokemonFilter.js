@@ -24,7 +24,7 @@ const PokemonFilter = props => {
   const { onClick, category } = props;
   return (
     <div className="form-group w-75 m-auto">
-      <h3 className="d-flex justify-content-center">
+      <h3 className="d-flex justify-content-center align-items-center">
         Pokemon Type:
         <span className="ml-2">
           <select name="category" className="custom-select" value={category} onChange={e => onClick(e)}>
