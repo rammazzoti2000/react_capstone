@@ -8,7 +8,7 @@ import { getPokemonsError, getPokemons, getPokemonPending } from '../reducers/po
 import fetchPokemonsActions from '../api/pokemonApi';
 import Pokemon from '../components/Pokemon';
 
-const PokemonCard = ({ fetchPokemon, data }) => {
+export const PokemonCard = ({ fetchPokemon, data }) => {
   const { error, pending, pokemons = [] } = data;
 
   const { name } = useParams();
@@ -46,7 +46,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   fetchPokemon: fetchPokemonsActions.fetchPokemon,
 }, dispatch);
 
-const mapStatetoProps = state => ({
+const mapStateToProps = state => ({
   data: {
     error: getPokemonsError(state.data),
     pokemons: getPokemons(state.data),
@@ -71,4 +71,4 @@ PokemonCard.propTypes = {
   fetchPokemon: PropTypes.func.isRequired,
 };
 
-export default connect(mapStatetoProps, mapDispatchToProps)(PokemonCard);
+export default connect(mapStateToProps, mapDispatchToProps)(PokemonCard);
