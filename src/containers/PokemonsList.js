@@ -9,7 +9,7 @@ import { getPokemonType } from '../reducers/filter';
 import PokemonMain from '../components/PokemonMain';
 import PokemonFilter from '../components/PokemonFilter';
 
-class PokemonList extends React.Component {
+export class PokemonList extends React.Component {
   constructor(props) {
     super(props);
     this.handleFilterChange = this.handleFilterChange.bind(this);
