@@ -106,8 +106,8 @@ To have this app on your pc, you need to:
     - Your app is ready to be deployed!
 
 ## Automated Test
- > to be added
- 
+  - `$ npm run test` - Launches the test runner in the interactive watch mode, see the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
  ## Walkthrough Video and Deployment (Heroku)
 https://www.loom.com/share/5860127540704697aba0d3dc360b97bd
 ##
